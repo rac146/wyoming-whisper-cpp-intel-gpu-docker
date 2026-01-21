@@ -15,9 +15,6 @@ services:
       # Change this number to match your "render" host group id
       # You can get the id number by running: getent group render
      # - "107"
-    environment:
-      - PUID=1000  # Your QNAP User ID
-      - PGID=100 
     security_opt:
       - no-new-privileges:true
     volumes:
@@ -32,6 +29,8 @@ services:
     devices:
       - /dev/dri:/dev/dri
     environment:
+      - PUID=1000  # Your QNAP User ID
+      - PGID=100 
       - SYCL_CACHE_PERSISTENT=1
       - SYCL_CACHE_DIR=/models/sycl_cache
       - SYCL_DEVICE_ALLOWLIST=BackendName:level_zero

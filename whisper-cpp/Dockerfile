@@ -10,9 +10,7 @@ RUN \
     && apt-get install -y --no-install-recommends \
         netcat-traditional \
         intel-opencl-icd \
-        intel-level-zero-gpu \
-        level-zero \
-        libigdgmm12
+        intel-level-zero-gpu
 
 RUN \
     git clone https://github.com/ggerganov/whisper.cpp.git whisper.cpp \

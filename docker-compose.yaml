@@ -4,7 +4,7 @@ services:
       context: ./whisper-cpp
       args:
         - WHISPER_CPP_VERSION=1.7.4
-        - BUILD_FROM=intel/oneapi:2025.0.1-0-devel-ubuntu24.04
+        - BUILD_FROM=lscr.io/linuxserver/jellyfin:latest
     restart: unless-stopped
     depends_on:
       model-download:

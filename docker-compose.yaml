@@ -15,6 +15,9 @@ services:
       # Change this number to match your "render" host group id
       # You can get the id number by running: getent group render
      # - "107"
+    environment:
+      - PUID=1000  # Your QNAP User ID
+      - PGID=100 
     security_opt:
       - no-new-privileges:true
     volumes:
@@ -46,6 +49,9 @@ services:
       - no-new-privileges:true
     # Change user to the one that will run the container
     #user: 1000:1000
+    environment:
+      - PUID=1000  # Your QNAP User ID
+      - PGID=100 
     networks:
       whisper: {}
     ports:
@@ -54,7 +60,10 @@ services:
   model-download:
     security_opt:
       - no-new-privileges:true
-    user: 1000:1000
+    #user: 1000:1000
+    environment:
+      - PUID=1000  # Your QNAP User ID
+      - PGID=100 
     build:
       context: ./model-download
     volumes:

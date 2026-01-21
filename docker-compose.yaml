@@ -4,7 +4,7 @@ services:
       context: ./whisper-cpp
       args:
         - WHISPER_CPP_VERSION=1.7.4
-        - BUILD_FROM=openvino/ubuntu24_runtime:latest
+        - BUILD_FROM=intel/oneapi:2025.3.0-0-devel-ubuntu24.04
     restart: unless-stopped
     depends_on:
       model-download:

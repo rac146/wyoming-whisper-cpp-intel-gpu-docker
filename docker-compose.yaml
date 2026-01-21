@@ -6,7 +6,6 @@ services:
         - WHISPER_CPP_VERSION=1.7.4
         - BUILD_FROM=intel/oneapi:2025.0.1-0-devel-ubuntu24.04
     restart: unless-stopped
-    privileged: true
     depends_on:
       model-download:
         condition: service_completed_successfully

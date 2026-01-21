@@ -8,7 +8,11 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN \
     apt-get update \
     && apt-get install -y --no-install-recommends \
-        netcat-traditional
+        netcat-traditional \
+        intel-opencl-icd \
+        intel-level-zero-gpu \
+        level-zero \
+        libigdgmm12
 
 RUN \
     git clone https://github.com/ggerganov/whisper.cpp.git whisper.cpp \

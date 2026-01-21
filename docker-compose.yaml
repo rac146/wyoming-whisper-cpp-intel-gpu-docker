@@ -60,9 +60,6 @@ services:
     security_opt:
       - no-new-privileges:true
     #user: 1000:1000
-    environment:
-      - PUID=1000  # Your QNAP User ID
-      - PGID=100 
     build:
       context: ./model-download
     volumes:
@@ -75,6 +72,8 @@ services:
     networks:
       whisper: {}
     environment:
+      - PUID=1000  # Your QNAP User ID
+      - PGID=100 
       - MODEL=${WHISPER_MODEL}
 networks:
   whisper: {}

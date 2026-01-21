@@ -38,10 +38,10 @@ services:
       - LIBVA_DRIVER_NAME=iHD
       #- NEOReadDebugKeys=1
       #- ClDeviceIDOverride=0x4E55 
-    #command: build/bin/whisper-server -l ${WHISPER_LANG} -bs ${WHISPER_BEAM_SIZE} -m /models/ggml-${WHISPER_MODEL}.bin --host 0.0.0.0 --port 8910 --suppress-nst --prompt "${WHISPER_PROMPT}"
-    command: tail -f /dev/null
-    tty: true
-    stdin_open: true
+    command: build/bin/whisper-server -l ${WHISPER_LANG} -bs ${WHISPER_BEAM_SIZE} -m /models/ggml-${WHISPER_MODEL}.bin --host 0.0.0.0 --port 8910 --suppress-nst --prompt "${WHISPER_PROMPT}"
+    #command: tail -f /dev/null
+    #tty: true
+    #stdin_open: true
   wyoming-api:
     build:
       context: ./wyoming-api

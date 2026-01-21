@@ -11,10 +11,10 @@ services:
         condition: service_completed_successfully
     # Change user to the one that will run the container
     #user: 1000:1000
-    #group_add:
+    group_add:
       # Change this number to match your "render" host group id
       # You can get the id number by running: getent group render
-     # - "107"
+      - "0"
     security_opt:
       - no-new-privileges:true
     volumes:

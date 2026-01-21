@@ -4,17 +4,17 @@ services:
       context: ./whisper-cpp
       args:
         - WHISPER_CPP_VERSION=1.7.4
-        - BUILD_FROM=intel/oneapi:2025.0.1-0-devel-ubuntu24.04
+        - BUILD_FROM=intelanalytics/ipex-llm-inference-cpp-xpu
     restart: unless-stopped
     depends_on:
       model-download:
         condition: service_completed_successfully
     # Change user to the one that will run the container
-    #user: 1000:1000
-    group_add:
+    #user: 0:0
+   # group_add:
       # Change this number to match your "render" host group id
       # You can get the id number by running: getent group render
-      - "0"
+     # - "0"
     security_opt:
       - no-new-privileges:true
     volumes:
@@ -28,16 +28,20 @@ services:
     hostname: whispercpp
     devices:
       - /dev/dri:/dev/dri
-      - /dev/dri/renderD128:/dev/dri/renderD128
-      - /dev/dri/card0:/dev/dri/card0
     environment:
-      - PUID=1000  # Your QNAP User ID
-      - PGID=100 
+      - PUID=0  # Your QNAP User ID
+      - PGID=0
       - SYCL_CACHE_PERSISTENT=1
       - SYCL_CACHE_DIR=/models/sycl_cache
-      - SYCL_DEVICE_ALLOWLIST=BackendName:level_zero
-      - ONEAPI_DEVICE_SELECTOR=opencl:0
-    command: build/bin/whisper-server -l ${WHISPER_LANG} -bs ${WHISPER_BEAM_SIZE} -m /models/ggml-${WHISPER_MODEL}.bin --host 0.0.0.0 --port 8910 --suppress-nst --prompt "${WHISPER_PROMPT}"
+      #- SYCL_DEVICE_ALLOWLIST=BackendName:level_zero
+      - ONEAPI_DEVICE_SELECTOR=opencl:gpu
+      - LIBVA_DRIVER_NAME=iHD
+      #- NEOReadDebugKeys=1
+      #- ClDeviceIDOverride=0x4E55 
+    #command: build/bin/whisper-server -l ${WHISPER_LANG} -bs ${WHISPER_BEAM_SIZE} -m /models/ggml-${WHISPER_MODEL}.bin --host 0.0.0.0 --port 8910 --suppress-nst --prompt "${WHISPER_PROMPT}"
+    command: tail -f /dev/null
+    tty: true
+    stdin_open: true
   wyoming-api:
     build:
       context: ./wyoming-api
